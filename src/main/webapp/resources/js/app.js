@@ -164,11 +164,46 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+      // bags quantity
+      const quantityInput = document.querySelector('#quantity')
+      const summaryText = document.querySelector("#summaryBags")
+      // document.querySelector("#summaryBags").innerHTML = quantityInput.value
+      // address and pickup
+      const streetInput = document.querySelector('#street')
+      const cityInput = document.querySelector('#city')
+      const zipCodeInput = document.querySelector('#zipCode')
+      const phoneInput = document.querySelector('#phone')
+      const pikUpDateInput = document.querySelector('#pickUpDate')
+      const pikUpTimeInput = document.querySelector('#pickUpTime')
+      const pikUpCommentInput = document.querySelector('#pickUpComment')
+      document.querySelector('#summaryStreet').innerHTML = streetInput.value
+      document.querySelector('#summaryCity').innerHTML = cityInput.value
+      document.querySelector('#summaryZipCode').innerHTML = zipCodeInput.value
+      document.querySelector('#summaryPhone').innerHTML = phoneInput.value
+      document.querySelector('#summaryDate').innerHTML = pikUpDateInput.value
+      document.querySelector('#summaryTime').innerHTML = pikUpTimeInput.value
+      document.querySelector('#summaryComment').innerHTML = pikUpCommentInput.value
+      // institution
+      const radioInputs = document.querySelectorAll('input[name="institution"]')
+      for (let i = 0; i < radioInputs.length; ++i){
+        if (radioInputs[i].checked){
+          document.querySelector('#summaryInstitution').innerHTML = "Dla fundacji \"" + radioInputs[i].nextElementSibling.innerHTML + "\""
+        }
+      }
+      // category
+      let categories = ""
+      const checkBoxes = document.querySelectorAll('input[name="categoryList"]')
+      for (let i = 0; i < checkBoxes.length; ++i){
+        if (checkBoxes[i].checked) {
+          categories = categories + checkBoxes[i].nextElementSibling.innerHTML + ", "
+        }
+      }
+      document.querySelector("#summaryBags").innerHTML = quantityInput.value + " worki " + categories
     }
-
   }
   const form = document.querySelector(".form--steps");
   if (form !== null) {
     new FormSteps(form);
   }
+
 });
